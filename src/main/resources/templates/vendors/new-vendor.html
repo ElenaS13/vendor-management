@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header"></head>
+
+<body>
+
+<nav th:replace="layouts :: navbar"></nav>
+
+	<div class="container">
+		<form action="/vendors/save" th:object="${vendor}" method="POST">
+		<input type="text" placeholder="Company Name" th:field="${vendor.companyName}">
+		<input type="text" placeholder="First Name" th:field="${vendor.firstName}">
+		<input type="text" placeholder="Last Name" th:field="${vendor.lastName}">
+		<input type="text" placeholder="Email Address" th:field="${vendor.email}">
+
+		
+		<button> type="submit">Create Vendor</button>
+		</form>
+	</div>
+	
+</body>
+
+</html>
