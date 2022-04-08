@@ -1,9 +1,12 @@
 package com.elena.vma.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Project {
@@ -14,6 +17,9 @@ public class Project {
 	private String name;
 	private String stage;
 	private String description;
+	
+	@OneToMany(mappedBy ="theProject")
+	private List<Vendor> vendors;
 	
 	
 	public Project() {
@@ -29,6 +35,17 @@ public class Project {
 	}
 	
 	
+	
+	public List<Vendor> getVendors() {
+		return vendors;
+	}
+
+
+	public void setVendors(List<Vendor> vendors) {
+		this.vendors = vendors;
+	}
+
+
 	public long getProjectId() {
 		return projectId;
 	}

@@ -1,9 +1,13 @@
 package com.elena.vma.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Vendor {
@@ -17,6 +21,11 @@ public class Vendor {
 	private String companyName;
 	private String email;
 	
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+			fetch = FetchType.LAZY)
+	@JoinColumn(name="project_id")
+	private Project theProject;
+	
 	public Vendor() {
 		
 	}
@@ -29,6 +38,20 @@ public class Vendor {
 		this.lastName = lastName;
 		this.companyName = companyName;
 		this.email = email;
+	}
+
+
+    
+	
+	
+	public Project getTheProject() {
+		return theProject;
+	}
+
+
+
+	public void setTheProject(Project theProject) {
+		this.theProject = theProject;
 	}
 
 
@@ -72,8 +95,9 @@ public class Vendor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+
+
 	
 
 }
