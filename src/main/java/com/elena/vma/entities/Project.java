@@ -2,11 +2,15 @@ package com.elena.vma.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class Project {
@@ -18,7 +22,10 @@ public class Project {
 	private String stage;
 	private String description;
 	
-	@OneToMany(mappedBy ="theProject")
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+			fetch = FetchType.LAZY)
+	@JoinTable(name="project_vendor", joinColumns=@JoinColumn(name="project_id"),
+	           inverseJoinColumns=@JoinColumn(name="vendor_id"))
 	private List<Vendor> vendors;
 	
 	

@@ -1,5 +1,7 @@
 package com.elena.vma.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Vendor {
@@ -21,10 +24,11 @@ public class Vendor {
 	private String companyName;
 	private String email;
 	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
 			fetch = FetchType.LAZY)
-	@JoinColumn(name="project_id")
-	private Project theProject;
+	@JoinTable(name="project_vendor", joinColumns=@JoinColumn(name="vendor_id"),
+    inverseJoinColumns=@JoinColumn(name="project_id"))
+	private List<Project> theProject;
 	
 	public Vendor() {
 		
@@ -44,13 +48,17 @@ public class Vendor {
     
 	
 	
-	public Project getTheProject() {
+	
+
+
+
+	public List<Project> getTheProject() {
 		return theProject;
 	}
 
 
 
-	public void setTheProject(Project theProject) {
+	public void setTheProject(List<Project> theProject) {
 		this.theProject = theProject;
 	}
 

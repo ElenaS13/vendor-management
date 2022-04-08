@@ -43,15 +43,11 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/save")
-	public String createProject(Project project, @RequestParam List<Long> vendors, Model model) {
+	public String createProject(Project project, Model model) {
 		//this method saves the project to db
 		
 		proRepo.save(project);
-		Iterable<Vendor> chosenVendors = vendorRepo.findAllById(vendors);
-		for(Vendor ven : chosenVendors) {
-			ven.setTheProject(project);
-			vendorRepo.save(ven);
-		}
+		
 		return "redirect:/projects/new";		
 		
 	}
