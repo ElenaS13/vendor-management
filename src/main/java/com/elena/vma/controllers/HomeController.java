@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.elena.vma.dao.ProjectRepository;
 import com.elena.vma.dao.VendorRepository;
+import com.elena.vma.dto.VendorProject;
 import com.elena.vma.entities.Project;
 import com.elena.vma.entities.Vendor;
 
@@ -28,8 +29,8 @@ public class HomeController {
 		model.addAttribute("projectsList", projects);
 		
 		
-		List<Vendor> vendors = vendorRepo.findAll();
-		model.addAttribute("vendorList", vendors);
+		List<VendorProject> vendorProjectCnt = vendorRepo.vendorProjects();
+		model.addAttribute("vendorListProjectCnt", vendorProjectCnt);
 		return "main/home";
 	}
 	
