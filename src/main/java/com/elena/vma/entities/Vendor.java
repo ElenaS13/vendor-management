@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 public class Vendor {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long vendorId;
 	
 	private String firstName;
