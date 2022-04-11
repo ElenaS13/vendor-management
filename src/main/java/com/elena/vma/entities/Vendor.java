@@ -11,17 +11,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Vendor {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(generator = "vendor_seq")
 	private long vendorId;
 	
 	private String firstName;
 	private String lastName;
-	private String companyName;
+	//private String companyName;
 	private String email;
 	
 	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
@@ -40,7 +41,7 @@ public class Vendor {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.companyName = companyName;
+		//this.companyName = companyName;
 		this.email = email;
 	}
 
@@ -88,13 +89,13 @@ public class Vendor {
 		this.lastName = lastName;
 	}
 
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
+//	public String getCompanyName() {
+//		return companyName;
+//	}
+//
+//	public void setCompanyName(String companyName) {
+//		this.companyName = companyName;
+//	}
 
 	public String getEmail() {
 		return email;
