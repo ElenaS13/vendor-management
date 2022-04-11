@@ -1,0 +1,3 @@
+DROP TABLE project_vendor IF EXISTS;
+DROP TABLE project IF EXISTS;
+DROP TABLE vendor IF EXISTS;
