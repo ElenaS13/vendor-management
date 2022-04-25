@@ -5,11 +5,11 @@ I adopted this application to create a program for the small business owned by m
 
 ## The project leverages the following:
 
--Spring boot
--Thymeleaf
--PostgreSQL
--Hibernate
--Spring Security
--RESTFUL Web Services API
--Spring MVC 
--Docker
+- Spring boot
+- Thymeleaf
+- PostgreSQL
+- Hibernate
+- Spring Security
+- RESTFUL Web Services API
+- Spring MVC 
+- Docker
