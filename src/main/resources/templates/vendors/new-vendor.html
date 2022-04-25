@@ -8,15 +8,39 @@
 
 <nav th:replace="layouts :: navbar"></nav>
 
+<br>
 	<div class="container">
 		<form action="/vendors/save" th:object="${vendor}" method="POST">
-
-		<input type="text" placeholder="First Name" th:field="${vendor.firstName}">
-		<input type="text" placeholder="Last Name" th:field="${vendor.lastName}">
-		<input type="text" placeholder="Email Address" th:field="${vendor.email}">
-
 		
-		<button type="submit">Create Vendor</button>
+		<!--  This will be used to bind to the vendor that was clicked on (USED FOR UPDATES)-->
+		<input type="hidden" th:field="${vendor.vendorId}"/>
+      
+      <div class="form-group row">
+		<input type="text" placeholder="First Name" th:field="${vendor.firstName}">
+		  <span style="color:red" th:if="${#fields.hasErrors('firstName')}"
+				  th:errors="${vendor.firstName}">
+			</span>
+		
+      </div>	
+      
+      <div class="form-group row">
+		<input type="text" placeholder="Last Name" th:field="${vendor.lastName}">
+		<span style="color:red" th:if="${#fields.hasErrors('lastName')}"
+				  th:errors="${vendor.lastName}">
+			</span>
+	</div>		
+		
+	   <div class="form-group row">	
+		<input type="text" placeholder="Email Address" th:field="${vendor.email}">
+		<span style="color:red" th:if="${#fields.hasErrors('email')}"
+				  th:errors="${vendor.email}">
+			</span>
+	</div>			
+
+		<div class="form-group row">	
+			<button class="btn btn-info col-2" type="submit">Enter Vendor</button>
+		</div>	
+		
 		</form>
 	</div>
 	

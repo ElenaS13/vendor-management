@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.elena.vma.dto.VendorProject;
 import com.elena.vma.entities.Vendor;
 
+@RepositoryRestResource(collectionResourceRel="apivendors", path="apivendors")
 public interface VendorRepository extends CrudRepository<Vendor, Long> {
 	@Override
 	public List<Vendor> findAll();
@@ -16,4 +18,6 @@ public interface VendorRepository extends CrudRepository<Vendor, Long> {
 			+ "FROM vendor e left join project_vendor pe ON pe.vendor_id=e.vendor_id "
 			+ "GROUP BY e.first_name, e.last_name ORDER BY 3 DESC")
 	public List<VendorProject> vendorProjects();
+
+	public Vendor findByVendorId(long theId);
 }

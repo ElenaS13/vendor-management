@@ -1,17 +1,18 @@
 package com.elena.vma.entities;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.JoinColumn;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Project {
@@ -22,11 +23,16 @@ public class Project {
 	private String name;
 	private String stage;
 	private String description;
+	private Date startDate;
+	private Date endDate;
+	
 	
 	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
 			fetch = FetchType.LAZY)
 	@JoinTable(name="project_vendor", joinColumns=@JoinColumn(name="project_id"),
 	           inverseJoinColumns=@JoinColumn(name="vendor_id"))
+	
+    
 	private List<Vendor> vendors;
 	
 	
@@ -77,6 +83,26 @@ public class Project {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	} 
 	
 	

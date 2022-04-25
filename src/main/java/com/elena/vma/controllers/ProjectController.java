@@ -14,20 +14,22 @@ import com.elena.vma.dao.ProjectRepository;
 import com.elena.vma.dao.VendorRepository;
 import com.elena.vma.entities.Project;
 import com.elena.vma.entities.Vendor;
+import com.elena.vma.services.ProjectService;
+import com.elena.vma.services.VendorService;
 
 @Controller
-@RequestMapping("/projects")
+@RequestMapping("projects")
 public class ProjectController {
 	
 	@Autowired
-	ProjectRepository proRepo;
+	ProjectService proService;
 	
 	@Autowired
-	VendorRepository vendorRepo;
+	VendorService vendorService;
 	
 	@GetMapping
 	public String displayProjects(Model model) {
-		List<Project> projects = proRepo.findAll();
+		List<Project> projects = proService.getAll();
 		model.addAttribute("projects", projects);
 		return "projects/list-projects";
 	}
@@ -36,20 +38,36 @@ public class ProjectController {
 	public String displayProjectForm(Model model) {
 		
 		Project aProject = new Project();
-		List<Vendor> vendors = vendorRepo.findAll();
+		Iterable<Vendor> vendors = vendorService.getAll();
 		model.addAttribute("allVendors", vendors);
 		model.addAttribute("project", aProject);
-		return "/projects/new-project";
+		return "projects/new-project";
 	}
 	
 	@PostMapping("/save")
 	public String createProject(Project project, Model model) {
 		//this method saves the project to db
 		
-		proRepo.save(project);
+		proService.save(project);
 		
 		return "redirect:/projects/new";		
 		
 	}
+	
+	 @GetMapping("/update")
+	    public String displayProjectUpdateForm(@RequestParam("id") long theId, Model model) {
+	    	Project theProject = proService.findByProjectId(theId);
+	    	model.addAttribute("project", theProject);
+	    	return "project/new-project";
+	    
+	    }
+	    
+	    @GetMapping("delete")
+	    	public String deleteProject(@RequestParam("id") long theId, Model model) {
+	    		Project theProject = proService.findByProjectId(theId);
+	    		proService.delete(theProject);
+	    		return "redirect:/projects";
+	    	}
+	    
 
 }

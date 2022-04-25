@@ -6,12 +6,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @Entity
 public class Vendor {
@@ -20,15 +25,25 @@ public class Vendor {
 	@GeneratedValue(generator = "vendor_seq")
 	private long vendorId;
 	
+	@NotBlank(message="*Must give a first name")
+	@Size(min=2, max=50)
 	private String firstName;
+	
+	
+	@NotBlank(message="*Must give a last name")
+	@Size(min=1, max=50)
 	private String lastName;
-	//private String companyName;
+	
+	@NotBlank
+	@Email(message="*Must be a valid email address")
 	private String email;
 	
 	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
 			fetch = FetchType.LAZY)
 	@JoinTable(name="project_vendor", joinColumns=@JoinColumn(name="vendor_id"),
     inverseJoinColumns=@JoinColumn(name="project_id"))
+	
+	@JsonIgnore
 	private List<Project> theProject;
 	
 	public Vendor() {
