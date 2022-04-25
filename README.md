@@ -1,4 +1,4 @@
-# vendor-management application
+# Vendor Management Application
 
 This applicaton is based on the tutorial by Imtiaz Ahmad for Project Management application. 
 I adopted this application to create a program for the small business owned by my family to record vendors that we work with and product IDs that they supply us with. 
